@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sumbul Fatima</title>
+  <meta name="description" content="Sumbul Fatima's personal website: life, hobbies, travel and work." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!--
+    This file is the page LAYOUT. To change your text, links or photos,
+    edit content.js instead. You rarely need to touch this file.
+  -->
+
+  <nav>
+    <div class="wrap">
+      <a href="#" class="logo serif"><span id="nav-name"></span><span>.</span></a>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#now">Now</a></li>
+        <li><a href="#hobbies">Hobbies</a></li>
+        <li><a href="#travel">Travel</a></li>
+        <li><a href="#career">Career</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="wrap hero">
+    <div>
+      <p class="hello" id="greeting"></p>
+      <h1 id="name"></h1>
+      <p id="intro"></p>
+      <div class="chips" id="tags"></div>
+    </div>
+    <div class="portrait" id="portrait"></div>
+  </header>
+
+  <section id="about">
+    <div class="wrap about">
+      <div id="about-text">
+        <p class="label">About me</p>
+        <h2>A little about who I am</h2>
+      </div>
+      <ul class="facts" id="facts"></ul>
+    </div>
+  </section>
+
+  <section id="now">
+    <div class="wrap">
+      <p class="label">Now</p>
+      <h2>What I'm up to these days</h2>
+      <p class="sub">A snapshot of my life right now. I update this every month or so.</p>
+      <div class="now" id="now-items"></div>
+      <p class="updated">Last updated: <span id="now-updated"></span></p>
+    </div>
+  </section>
+
+  <section id="hobbies">
+    <div class="wrap">
+      <p class="label">Hobbies</p>
+      <h2>Things I love doing</h2>
+      <p class="sub">When I'm not at a keyboard, you'll find me doing one of these.</p>
+      <div class="hobbies" id="hobby-list"></div>
+    </div>
+  </section>
+
+  <section id="travel">
+    <div class="wrap">
+      <p class="label">Travel</p>
+      <h2>Places I've been</h2>
+      <p class="sub">Every trip teaches me something new. Here are a few favorites.</p>
+      <div class="travel-stats">
+        <div class="stat"><b id="countries"></b><span>countries</span></div>
+        <div class="stat"><b id="cities"></b><span>cities</span></div>
+        <div class="stat"><b>∞</b><span>memories</span></div>
+      </div>
+      <div class="trips" id="trip-list"></div>
+      <p class="wishlist" id="wishlist"><b>Next on my list:</b> <span></span></p>
+    </div>
+  </section>
+
+  <section id="career">
+    <div class="wrap career">
+      <div>
+        <p class="label">Career</p>
+        <h2>What I do for work</h2>
+        <p id="career-summary"></p>
+        <div class="tags" id="skills"></div>
+        <div class="actions" id="career-links"></div>
+      </div>
+      <div class="projects" id="project-list"></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap contact">
+      <p class="label">Say hi</p>
+      <h2>Let's connect</h2>
+      <p class="sub" id="contact-text"></p>
+      <div class="actions" id="contact-links"></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">© <span id="year"></span> <span id="footer-name"></span> · Made with care</div>
+  </footer>
+
+  <script src="content.js"></script>
+  <script>
+    // Builds the page from content.js. You don't need to edit this.
+    const S = window.SITE;
+    const $ = (id) => document.getElementById(id);
+    const GRADIENTS = [
+      "linear-gradient(135deg,#0ea5e9,#6366f1)", "linear-gradient(135deg,#f97316,#db2777)",
+      "linear-gradient(135deg,#14b8a6,#65a30d)", "linear-gradient(135deg,#a855f7,#f43f5e)",
+      "linear-gradient(135deg,#f59e0b,#ef4444)", "linear-gradient(135deg,#10b981,#0ea5e9)"
+    ];
+
+    function el(tag, cls, text) {
+      const e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (text !== undefined) e.textContent = text;
+      return e;
+    }
+    function picture(src, alt, i, label) {
+      if (src) { const img = el("img"); img.src = src; img.alt = alt; img.loading = "lazy"; return img; }
+      const ph = el("div", "ph", label || "");
+      ph.style.background = GRADIENTS[i % GRADIENTS.length];
+      return ph;
+    }
+    function button(text, href, primary) {
+      if (!href) return null;
+      const a = el("a", "btn" + (primary ? " primary" : ""), text);
+      a.href = href;
+      if (!href.startsWith("mailto:")) { a.target = "_blank"; a.rel = "noopener"; }
+      return a;
+    }
+    function addAll(parent, items) { items.filter(Boolean).forEach((x) => parent.append(x)); }
+
+    // Basics
+    $("nav-name").textContent = S.name.split(" ")[0];
+    $("greeting").textContent = S.greeting;
+    $("name").textContent = S.name;
+    $("intro").textContent = S.intro;
+    addAll($("tags"), S.tags.map((t) => el("span", "chip", t)));
+    $("portrait").append(picture(S.photo, "Photo of " + S.name, 0, "Your photo here"));
+    if (!S.photo) $("portrait").firstChild.style.background = "transparent";
+    document.title = S.name;
+    $("footer-name").textContent = S.name;
+    $("year").textContent = new Date().getFullYear();
+
+    // About
+    addAll($("about-text"), S.about.map((p) => el("p", "", p)));
+    addAll($("facts"), S.facts.map((f) => {
+      const li = el("li"); li.append(el("b", "", f.label), el("span", "", f.value)); return li;
+    }));
+
+    // Now
+    $("now-updated").textContent = S.now.updated;
+    addAll($("now-items"), S.now.items.map((n) => {
+      const d = el("div", "now-item"); d.append(el("div", "k", n.label), el("div", "v", n.title), el("div", "n", n.note)); return d;
+    }));
+
+    // Hobbies
+    addAll($("hobby-list"), S.hobbies.map((h, i) => {
+      const a = el("article", "hobby"), pic = el("div", "pic"), body = el("div", "body");
+      pic.append(picture(h.photo, h.name, i + 4, "Add photo"));
+      body.append(el("h3", "", h.name), el("p", "", h.text));
+      a.append(pic, body); return a;
+    }));
+
+    // Travel
+    $("countries").textContent = S.travel.countries;
+    $("cities").textContent = S.travel.cities;
+    if (S.travel.wishlist.length) $("wishlist").querySelector("span").textContent = S.travel.wishlist.join(", ");
+    else $("wishlist").classList.add("hide");
+    addAll($("trip-list"), S.travel.trips.map((t, i) => {
+      const a = el("article", "trip"), pic = el("div", "pic"), info = el("div", "info");
+      pic.append(picture(t.photo, t.place, i));
+      info.append(el("div", "when", t.year), el("div", "where", t.place), el("div", "note", t.note));
+      a.append(pic, info); return a;
+    }));
+
+    // Career
+    $("career-summary").textContent = S.career.summary;
+    addAll($("skills"), S.career.skills.map((s) => el("span", "tag", s)));
+    addAll($("career-links"), [
+      button("GitHub", S.links.github, true), button("LinkedIn", S.links.linkedin), button("Résumé", S.links.resume)
+    ]);
+    addAll($("project-list"), S.career.projects.map((p) => {
+      const a = el("a", "project"), top = el("div", "top");
+      a.href = p.link || "#";
+      if (p.link) { a.target = "_blank"; a.rel = "noopener"; }
+      top.append(el("h3", "", p.name), el("span", "status", p.status));
+      a.append(top, el("p", "", p.text)); return a;
+    }));
+
+    // Contact
+    $("contact-text").textContent = S.contactText;
+    addAll($("contact-links"), [
+      button("Email me", S.links.email && "mailto:" + S.links.email, true),
+      button("GitHub", S.links.github, !S.links.email),
+      button("LinkedIn", S.links.linkedin), button("Instagram", S.links.instagram)
+    ]);
+  </script>
+</body>
+</html>
