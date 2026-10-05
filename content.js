@@ -21,7 +21,7 @@ window.SITE = {
   greeting: "Hi there, I'm",
   intro: "Engineer by day, curious explorer the rest of the time. This is my little corner of the internet: the things I love, the places I've been, and what I'm building.",
   tags: ["Engineer", "Traveler", "Reader", "Home cook"],
-  photo: "images/me.jpeg",                       // e.g. "images/me.jpg"
+  photo: "me.jpeg",                       // e.g. "images/me.jpg"
 
   // ---------- LINKS ----------
   links: {
@@ -58,7 +58,7 @@ window.SITE = {
 
   // ---------- HOBBIES ----------
   hobbies: [
-    { name: "Cooking", photo: "images/cooking.jpeg", text: "Experimenting with recipes from different cuisines, especially family recipes." },
+    { name: "Cooking", photo: "cooking.jpeg", text: "Experimenting with recipes from different cuisines, especially family recipes." },
     { name: "Hiking",  photo: "", text: "Chasing views and quiet trails on the weekends." },
     { name: "Reading", photo: "", text: "Fiction, memoirs, and the occasional tech book." }
   ],
@@ -69,7 +69,7 @@ window.SITE = {
     cities: 12,
     wishlist: ["Japan", "Turkey", "Iceland"],
     trips: [
-      { place: "Engelberg, Switzerland", year: "2026", photo: "images/engelberg.jpeg", note: "Truly Heaven on Earth" },
+      { place: "Engelberg, Switzerland", year: "2026", photo: "engelberg.jpeg", note: "Truly Heaven on Earth" },
       { place: "City, Country", year: "2024", photo: "", note: "The food, the people, or a story you still tell." },
       { place: "City, Country", year: "2023", photo: "", note: "What surprised you most about this place." },
       { place: "City, Country", year: "2022", photo: "", note: "A tip you'd give anyone visiting." }
